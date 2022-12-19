@@ -1,16 +1,33 @@
 #pragma once
 
 #include "Human.hpp"
-
-#include <algorithm>
 #include <list>
 #include <vector>
+#include <algorithm>
 
-std::vector< char > foo(std::list< Human >& people)
+using namespace std;
+
+vector< char > foo(list< Human >& people)
 {
-    std::vector< char > ret_v(people.size());
+    
+    
+    for_each(people.begin(), people.end(), [](Human& person){person.birthday();});
+  
+    vector<char> znaki(people.size());
 
-    // Twoja implementacja tutaj
+    transform(people.begin(), people.end(), znaki.rbegin(), [](Human& person)
+    {
+        char tmp;
+        if (person.isMonster())
+        {
+            tmp = 'n';
+        }
+        else
+        {
+            tmp = 'y';
+        }
+        return tmp;
+    });
 
-    return ret_v;
+    return znaki;
 }
